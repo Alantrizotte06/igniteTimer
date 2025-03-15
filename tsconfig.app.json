@@ -35,7 +35,8 @@
     "strict": true,
     "resolveJsonModule": true,
     "types": ["styled-components"],
-    "typeRoots": ["node_modules/@types", "./types"]
+    "typeRoots": ["node_modules/@types", "./types"],
+    "jsx": "react-jsx"
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
