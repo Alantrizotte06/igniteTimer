@@ -10,9 +10,8 @@ export const HomeContainer = styled.main`
 
   form {
     display: flex;
-
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     gap: 3.5rem;
   }
 `;
@@ -46,6 +45,7 @@ const BaseInput = styled.input`
 
   &::placeholder {
     color: ${(props) => props.theme["gray-500"]};
+    text-align: center;
   }
 `;
 
