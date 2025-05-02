@@ -5,16 +5,13 @@ import * as zod from "zod";
 import differenceInSeconds from "date-fns/differenceInSeconds";
 
 import {
-  CountdownContainer,
-  FormContainer,
   HomeContainer,
-  MinutesAmountInput,
-  Separator,
   StartCountdownButton,
   StopCountdownButton,
-  TaskInput,
 } from "./styles";
 import { useEffect, useState } from "react";
+import { NewCycleForm } from "./components/NewCycleForm";
+import { Countdown } from "./components/Countdown";
 
 const newCycleFormValidationSchema = zod.object({
   task: zod.string().min(1, "Informe a tarefa"),
@@ -65,7 +62,7 @@ export function Home() {
   const seconds = String(secondsAmount).padStart(2, "0");
 
   useEffect(() => {
-    let interval: number | ReturnType<typeof setInterval>;
+    let interval: number;
 
     if (activeCycle) {
       interval = setInterval(() => {
@@ -84,10 +81,12 @@ export function Home() {
 
         setAmountSecondPassed(totalSeconds)
         clearInterval(interval)
+
+        setActiveCycleId(null)
       } else {
         setAmountSecondPassed(secondsDifference)
       }
-    }, 1000);
+     }, 1000);
   }
 
     return () => {
@@ -138,47 +137,10 @@ export function Home() {
   return (
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
-        <FormContainer>
-          <label htmlFor="task">Vou trabalhar em</label>
-          <TaskInput
-            id="task"
-            list="task-suggestions"
-            placeholder="Dê um nome ao seu projeto"
-            disabled={!!activeCycle}
-            {...register("task")}
-          />
+        <NewCycleForm />
+        <Countdown />
 
-          <datalist id="task-suggestions">
-            <option value="Foco inicio do dia" />
-            <option value="Foco pré almoço" />
-            <option value="Pausa almoço" />
-            <option value="Foco pós almoço" />
-            <option value="Foco fim do dia" />
-          </datalist>
-
-          <label htmlFor="minutesAmount">durante</label>
-          <MinutesAmountInput
-            type="number"
-            id="minutesAmount"
-            placeholder="00"
-            step={5}
-            min={1}
-            max={60}
-            disabled={!!activeCycle}
-            {...register("minutesAmount", { valueAsNumber: true })}
-          />
-
-          <span>minutos.</span>
-        </FormContainer>
-
-        <CountdownContainer>
-          <span>{minutes[0]}</span>
-          <span>{minutes[1]}</span>
-          <Separator>:</Separator>
-          <span>{seconds[0]}</span>
-          <span>{seconds[1]}</span>
-        </CountdownContainer>
-
+        
         {activeCycle ? (
           <StopCountdownButton onClick={handleInterruptCycle} type="button">
             <HandPalm size={24} />
