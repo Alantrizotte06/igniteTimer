@@ -13,13 +13,10 @@ import { useEffect, useState } from "react";
 import { NewCycleForm } from "./components/NewCycleForm";
 import { Countdown } from "./components/Countdown";
 
-
-
 // interface newCycleFormData {
 //   task: string;
 //   minutesAmount: number;
 // }
-
 
 interface Cycle {
   id: string;
@@ -69,8 +66,8 @@ export function Home() {
         } else {
           return cycle;
         }
-      }),
-    )
+      })
+    );
 
     setActiveCycleId(null);
   }
@@ -88,9 +85,8 @@ export function Home() {
     <HomeContainer>
       <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <NewCycleForm />
-        <Countdown />
+        <Countdown activeCycle={activeCycle} />
 
-        
         {activeCycle ? (
           <StopCountdownButton onClick={handleInterruptCycle} type="button">
             <HandPalm size={24} />
