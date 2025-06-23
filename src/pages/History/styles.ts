@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 export const HistoryContainer = styled.main`
   flex: 1;
-  padding: 3.5rem;
+  padding: 1.5rem 3.5rem;
+  overflow: hidden;
 
   display: flex;
   flex-direction: column;
 
   h1 {
     font-size: 1.5rem;
+    padding-bottom: 0.5rem;
     color: ${(props) => props.theme["gray-100"]};
   }
 `;
@@ -16,12 +18,29 @@ export const HistoryContainer = styled.main`
 export const HistoryList = styled.div`
   flex: 1;
   overflow: auto;
-  margin-top: 2rem;
+  /* margin-bottom: 4rem; */
+
+  &::-webkit-scrollbar {
+    background: ${(props) => props.theme["gray-800"]};
+    width: 0.8rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: ${(props) => props.theme["gray-600"]};
+    border-radius: 0.5rem;
+  }
 
   table {
     width: 100%;
     border-collapse: collapse;
     min-width: 600px;
+    margin-bottom: 3.5rem;
+
+    thead {
+      position: sticky;
+      top: 0;
+      background-color: ${(props) => props.theme["gray-600"]};
+    }
 
     th {
       background-color: ${(props) => props.theme["gray-600"]};
