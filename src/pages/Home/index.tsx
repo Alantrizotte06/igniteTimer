@@ -34,14 +34,19 @@ export function Home() {
     },
   });
 
-  const { handleSubmit, watch /*reset*/ } = newCycleForm;
+  const { handleSubmit, watch, reset } = newCycleForm;
+
+  function handleCreateNewCycle(data: newCycleFormData) {
+    createNewCycle(data);
+    reset();
+  }
 
   const task = watch("task"); // Monitorar se o campo está vazio desabilitando o botão.
   const isSubmitDisable = !task;
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(createNewCycle)} action="">
+      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <FormProvider {...newCycleForm}>
           <NewCycleForm />
         </FormProvider>
