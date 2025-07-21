@@ -1,4 +1,4 @@
-import { CyclesContextProvider } from "./contexts/Cyclescontext";
+import { CyclesContextProvider } from "./contexts/CyclesContext";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./pages/Router";
